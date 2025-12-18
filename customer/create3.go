@@ -2,7 +2,6 @@ package customer
 
 import (
 	"errors"
-	"fmt"
 
 	"github.com/google/uuid"
 )
@@ -11,7 +10,7 @@ func createOrder(nbItems int) (Order, error) {
 	var order Order = Order{}
 	order.uuid = uuid.New().String() // generer uuid from github package
 	if nbItems <= 0 {
-		return Order{}, errors.New("Nombre d'item invalid")
+		return Order{}, errors.New("nombre d'item invalid")
 	}
 
 	var items []Item = make([]Item, 0, nbItems)
@@ -23,7 +22,10 @@ func createOrder(nbItems int) (Order, error) {
 		}
 		addItem(item, items)
 	}
-	var client Customer = createCustomer()
+	client, err := createCustomer()
+	if err != nil {
+		return Order{}, err
+	}
 	order.customer = client
 
 	return order, nil
@@ -32,16 +34,4 @@ func createOrder(nbItems int) (Order, error) {
 
 func addItem(item Item, items []Item) {
 	items = append(items, item)
-}
-
-func GetOrder() {
-	var nbItems int
-	fmt.Print("Saisir le nombre d'items pour ta commande: ")
-	fmt.Scan(&nbItems)
-	order, err := createOrder(nbItems)
-	if err != nil {
-		fmt.Println("error is raised: ", err)
-		return
-	}
-	fmt.Println("la commande:", order)
 }
