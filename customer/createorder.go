@@ -20,18 +20,15 @@ func createOrder(nbItems int) (Order, error) {
 		if err != nil {
 			return Order{}, err
 		}
-		addItem(item, items)
+		items = append(items, item)
 	}
+	order.items = items
 	client, err := createCustomer()
 	if err != nil {
 		return Order{}, err
 	}
+
 	order.customer = client
 
 	return order, nil
-
-}
-
-func addItem(item Item, items []Item) {
-	items = append(items, item)
 }

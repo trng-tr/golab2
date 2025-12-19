@@ -5,6 +5,9 @@ import (
 	"os"
 )
 
-var reader = bufio.NewReader(os.Stdin)
+var scanner = bufio.NewScanner(os.Stdin)
 
-const errorMgs string = "error: reading impossible"
+const (
+	readingError string = "error: reading impossible"
+	emptyError   string = "error: string empty"
+)

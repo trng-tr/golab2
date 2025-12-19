@@ -7,10 +7,12 @@ import (
 
 func GetOrder() {
 	fmt.Print("Saisir le nombre d'items pour ta commande: ")
-
-	str, err := reader.ReadString('\n') // lire jusqu'à rencotre backline
-	if err != nil {
-		fmt.Println(errorMgs)
+	if !scanner.Scan() {
+		fmt.Println(readingError)
+	}
+	var str string = scanner.Text()
+	if str == "" {
+		fmt.Println(emptyError)
 		return
 	}
 	nbItems, err := strconv.ParseInt(str, 10, 64)

@@ -14,16 +14,22 @@ func createItem() (Item, error) {
 	var uuid string = uuid.New().String()
 	i.uuid = uuid
 	fmt.Print("Saisir le titre de l item: ")
-	title, err := reader.ReadString('\n')
+	if !scanner.Scan() {
+		return Item{}, errors.New(readingError)
+	}
+	var title string = scanner.Text()
 
-	if err != nil {
-		return Item{}, errors.New(errorMgs)
+	if title == "" {
+		return Item{}, errors.New(emptyError)
 	}
 	i.title = strings.TrimSpace(title) // remove space au débit et à la fin
 	fmt.Print("Saisir la quantité de l item: ")
-	str, err := reader.ReadString('\n')
-	if err != nil {
-		return Item{}, errors.New(errorMgs)
+	if !scanner.Scan() {
+		return Item{}, errors.New(readingError)
+	}
+	var str string = scanner.Text()
+	if str == "" {
+		return Item{}, errors.New(emptyError)
 	}
 
 	quantity, err := strconv.ParseInt(str, 10, 64)
