@@ -1,4 +1,4 @@
-package objects
+package customer
 
 type Customer struct {
 	uuid      string
