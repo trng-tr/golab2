@@ -3,14 +3,16 @@ package customer
 import (
 	"fmt"
 	"strconv"
+
+	"github.com/trng-tr/golab2/scan"
 )
 
 func GetOrder() {
 	fmt.Print("Saisir le nombre d'items pour ta commande: ")
-	if !scanner.Scan() {
+	if !scan.Scanner.Scan() {
 		fmt.Println(readingError)
 	}
-	var str string = scanner.Text()
+	var str string = scan.Scanner.Text()
 	if str == "" {
 		fmt.Println(emptyError)
 		return

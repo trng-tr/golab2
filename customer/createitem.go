@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/google/uuid"
+	"github.com/trng-tr/golab2/scan"
 )
 
 func createItem() (Item, error) {
@@ -14,20 +15,20 @@ func createItem() (Item, error) {
 	var uuid string = uuid.New().String()
 	i.uuid = uuid
 	fmt.Print("Saisir le titre de l item: ")
-	if !scanner.Scan() {
+	if !scan.Scanner.Scan() {
 		return Item{}, errors.New(readingError)
 	}
-	var title string = scanner.Text()
+	var title string = scan.Scanner.Text()
 
 	if title == "" {
 		return Item{}, errors.New(emptyError)
 	}
 	i.title = strings.TrimSpace(title) // remove space au débit et à la fin
 	fmt.Print("Saisir la quantité de l item: ")
-	if !scanner.Scan() {
+	if !scan.Scanner.Scan() {
 		return Item{}, errors.New(readingError)
 	}
-	var str string = scanner.Text()
+	var str string = scan.Scanner.Text()
 	if str == "" {
 		return Item{}, errors.New(emptyError)
 	}
