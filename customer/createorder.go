@@ -15,8 +15,8 @@ func createOrder(nbItems int) (Order, error) {
 
 	var items []Item = make([]Item, 0, nbItems)
 
-	for i := 0; i < nbItems; i++ {
-		item, err := createItem()
+	for i := 1; i <= nbItems; i++ {
+		item, err := createItem(i)
 		if err != nil {
 			return Order{}, err
 		}

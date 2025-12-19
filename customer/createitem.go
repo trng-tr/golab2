@@ -7,29 +7,31 @@ import (
 	"strings"
 
 	"github.com/google/uuid"
+	"github.com/trng-tr/golab2/constantes"
+	"github.com/trng-tr/golab2/scan"
 )
 
-func createItem() (Item, error) {
+func createItem(numItem int) (Item, error) {
 	var i Item = Item{}
 	var uuid string = uuid.New().String()
 	i.uuid = uuid
-	fmt.Print("Saisir le titre de l item: ")
-	if !scanner.Scan() {
-		return Item{}, errors.New(readingError)
+	fmt.Printf("Saisir le titre de l'item %d :", numItem)
+	if !scan.Scanner.Scan() {
+		return Item{}, errors.New(constantes.ReadingError)
 	}
-	var title string = scanner.Text()
+	var title string = scan.Scanner.Text()
 
 	if title == "" {
-		return Item{}, errors.New(emptyError)
+		return Item{}, errors.New(constantes.EmptyError)
 	}
 	i.title = strings.TrimSpace(title) // remove space au débit et à la fin
-	fmt.Print("Saisir la quantité de l item: ")
-	if !scanner.Scan() {
-		return Item{}, errors.New(readingError)
+	fmt.Printf("Saisir la quantité de l item %d :", numItem)
+	if !scan.Scanner.Scan() {
+		return Item{}, errors.New(constantes.ReadingError)
 	}
-	var str string = scanner.Text()
+	var str string = scan.Scanner.Text()
 	if str == "" {
-		return Item{}, errors.New(emptyError)
+		return Item{}, errors.New(constantes.EmptyError)
 	}
 
 	quantity, err := strconv.ParseInt(str, 10, 64)
