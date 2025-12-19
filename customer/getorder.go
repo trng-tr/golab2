@@ -4,17 +4,18 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/trng-tr/golab2/constantes"
 	"github.com/trng-tr/golab2/scan"
 )
 
 func GetOrder() {
 	fmt.Print("Saisir le nombre d'items pour ta commande: ")
 	if !scan.Scanner.Scan() {
-		fmt.Println(readingError)
+		fmt.Println(constantes.ReadingError)
 	}
 	var str string = scan.Scanner.Text()
 	if str == "" {
-		fmt.Println(emptyError)
+		fmt.Println(constantes.EmptyError)
 		return
 	}
 	nbItems, err := strconv.ParseInt(str, 10, 64)
