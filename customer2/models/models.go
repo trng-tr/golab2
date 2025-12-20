@@ -24,7 +24,7 @@ type Product struct { // utilsé pour remplir le stock
 	Sku         string // référence du produit
 	Name        string
 	Description string
-	Price       float64 // le prix peut changer avec le temps
+	UnitPrice   float64 // le prix peut changer avec le temps
 	Currency    string
 	Stock       Stock     // qté du produit en stock
 	CreatedAt   time.Time // date and time
@@ -34,7 +34,6 @@ type Product struct { // utilsé pour remplir le stock
 type Stock struct {
 	Quantity int
 }
-
 type Order struct {
 	Uuid      string
 	Customer  Customer
@@ -44,7 +43,7 @@ type Order struct {
 type OrderItem struct { //utilisé comme dto pour la commande
 	ProductName string
 	Quantity    int
-	Price       float64 // le prix au momenet de la commande ne change pas
+	UnitPrice   float64 // le prix au momenet de la commande ne change pas
 }
 
 const (

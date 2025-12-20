@@ -20,12 +20,12 @@ func CreateOrder(nbItems int) (models.Order, error) {
 
 	var items []models.OrderItem = make([]models.OrderItem, 0, nbItems)
 	for i := 1; i <= nbItems; i++ {
-		item, err := createOrderItem(i)
+		item, err := CreateOrderItem(i)
 		if err != nil {
 			return models.Order{}, err
 		}
 		items = append(items, item)
 	}
-	var createdAt string = time.Now().Format("2026-01-01") // formatage avec date de référence
+	var createdAt string = time.Now().Format("2006-01-02 15:04:05") // formatage avec date de référence
 	return models.NewOder(uuid, customer, items, createdAt)
 }
