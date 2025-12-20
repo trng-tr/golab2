@@ -36,7 +36,6 @@ func (o Order) PrintOrder() {
 }
 
 // outils mis en disposition de l'utilisateur pour ajouter des items dans sa commande
-func (order Order) AddItem(orderItem OrderItem) Order {
+func (order *Order) AddItem(orderItem OrderItem) {
 	order.Items = append(order.Items, orderItem)
-	return order
 }

@@ -6,20 +6,18 @@ import (
 	"strings"
 
 	"github.com/trng-tr/golab2/constantes"
-	"github.com/trng-tr/golab2/customer"
-	"github.com/trng-tr/golab2/customer2/models"
 	"github.com/trng-tr/golab2/customer2/services"
 	"github.com/trng-tr/golab2/read"
 )
 
 func main() {
-	customer.GetOrder()
+	/* customer.GetOrder()
 	c, err := services.CreateCustomer()
 	if err != nil {
 		fmt.Println("error is raised: ", err)
 		return
 	}
-	c.PrintCustomer()
+	c.PrintCustomer() */
 	fmt.Println("On va remplir le stock avec quelques produits")
 	fmt.Print("Saisir le nombre de produits pour le stock :")
 	str, err := read.StreamReader.ReadString('\n') // read until meet \n
@@ -70,7 +68,6 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	var newOrder models.Order = order.AddItem(item)
-	newOrder.PrintOrder()
-
+	order.AddItem(item)
+	order.PrintOrder()
 }
