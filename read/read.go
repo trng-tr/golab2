@@ -10,4 +10,4 @@ bufio.NewReader qui lit un flux de stream.
 bufio.NewReader est robuste que bufio.NewSacanner
 */
 
-var StreamReader bufio.Reader = *bufio.NewReader(os.Stdin)
+var StreamReader = bufio.NewReader(os.Stdin)
