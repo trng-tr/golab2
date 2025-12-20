@@ -1,7 +1,7 @@
 package models
 
-func NewCustomer(uuid string, firstname string, lastanme string, email string, address Address) (Customer, error) {
-
+func NewCustomer(uuid string, firstname string, lastanme string,
+	email string, address Address) (Customer, error) {
 	var c Customer = Customer{
 		Uuid:      uuid,
 		Firstname: firstname,
@@ -13,8 +13,8 @@ func NewCustomer(uuid string, firstname string, lastanme string, email string, a
 	return c, nil
 }
 
-func NewAddress(uuid string, streetNum int64, streetName string, zipCode string, city string, country string) (Address, error) {
-
+func NewAddress(uuid string, streetNum int64, streetName string, zipCode string,
+	city string, country string) (Address, error) {
 	return Address{
 		Uuid:       uuid,
 		StreetNum:  streetNum,

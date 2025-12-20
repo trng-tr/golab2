@@ -69,6 +69,5 @@ func createAddress() (models.Address, error) {
 	if country == "" {
 		return models.Address{}, errors.New(constantes.EmptyError)
 	}
-
 	return models.NewAddress(uuid, streetNum, streetName, zipCode, city, country)
 }

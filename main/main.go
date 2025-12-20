@@ -6,22 +6,23 @@ import (
 	"strings"
 
 	"github.com/trng-tr/golab2/constantes"
+	"github.com/trng-tr/golab2/customer"
+	"github.com/trng-tr/golab2/customer2/models"
 	"github.com/trng-tr/golab2/customer2/services"
 	"github.com/trng-tr/golab2/read"
 )
 
 func main() {
-	//	customer.GetOrder()
+	customer.GetOrder()
 	c, err := services.CreateCustomer()
 	if err != nil {
 		fmt.Println("error is raised: ", err)
 		return
 	}
-	fmt.Println(c)
-
+	c.PrintCustomer()
 	fmt.Println("On va remplir le stock avec quelques produits")
 	fmt.Print("Saisir le nombre de produits pour le stock :")
-	str, err := read.StreamReader.ReadString('\n')
+	str, err := read.StreamReader.ReadString('\n') // read until meet \n
 	if err != nil {
 		fmt.Println(constantes.ReadingError)
 		return
@@ -34,10 +35,16 @@ func main() {
 	if err != nil {
 		fmt.Println(constantes.ConversionError)
 	}
-	services.FillStcok(int(nbProducts))
-
-	fmt.Println("On passe une commande, saisir le nombre de produits")
-	strNbProd, err := read.StreamReader.ReadString('\n')
+	stock, err := services.FillStcok(int(nbProducts))
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	for _, product := range stock {
+		product.PrintProduct()
+	}
+	fmt.Print("On passe une commande, saisir le nombre de produits:")
+	strNbProd, err := read.StreamReader.ReadString('\n') // read until meet \n
 	if err != nil {
 		fmt.Println(constantes.ReadingError)
 		return
@@ -52,11 +59,18 @@ func main() {
 		fmt.Println(constantes.ConversionError)
 		return
 	}
-
 	order, err := services.CreateOrder(int(cmdNbProducts))
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println(order)
+	order.PrintOrder()
+	item, err := services.CreateOrderItem(len(order.Items))
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	var newOrder models.Order = order.AddItem(item)
+	newOrder.PrintOrder()
+
 }

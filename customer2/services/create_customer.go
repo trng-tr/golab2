@@ -11,7 +11,6 @@ import (
 )
 
 func CreateCustomer() (models.Customer, error) {
-
 	fmt.Print("Saisir le nom du client: ")
 	lastname, err := read.StreamReader.ReadString('\n') //read until meet \n
 	if err != nil {
@@ -32,7 +31,6 @@ func CreateCustomer() (models.Customer, error) {
 	if firstname == "" {
 		return models.Customer{}, errors.New(constantes.EmptyError)
 	}
-
 	fmt.Print("Saisir le email  du client: ")
 	email, err := read.StreamReader.ReadString('\n') //read until meet \n
 	if err != nil {
@@ -44,17 +42,13 @@ func CreateCustomer() (models.Customer, error) {
 	} else if len(email) < 5 || !strings.Contains(email, "@") {
 		return models.Customer{}, errors.New("Email invalid")
 	}
-
 	address, err := createAddress()
 	if err != nil {
 		return models.Customer{}, err
 	}
-
 	c, err := models.NewCustomer(uuid, firstname, lastname, email, address)
 	if err != nil {
 		return models.Customer{}, err
 	}
-
 	return c, nil
-
 }

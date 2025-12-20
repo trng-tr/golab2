@@ -21,6 +21,8 @@ func createStockProduct(numero int) (models.Product, error) {
 	name = strings.TrimSpace(name)
 	if name == "" {
 		return models.Product{}, errors.New(constantes.EmptyError)
+	} else if len(name) < 2 {
+		return models.Product{}, errors.New("product error: le nom du produit trop court")
 	}
 	var uuid string = generateUuid(name)
 	var sku string = generateUuid(name)
@@ -33,6 +35,8 @@ func createStockProduct(numero int) (models.Product, error) {
 	desc = strings.TrimSpace(desc)
 	if desc == "" {
 		return models.Product{}, errors.New(constantes.EmptyError)
+	} else if len(desc) < 1 {
+		return models.Product{}, errors.New("product error: description incomplete")
 	}
 	fmt.Printf("saisir le prix pour le produit %d: ", numero)
 	strPrice, err := read.StreamReader.ReadString('\n')
@@ -46,6 +50,8 @@ func createStockProduct(numero int) (models.Product, error) {
 	price, err := strconv.ParseFloat(strPrice, 64)
 	if err != nil {
 		return models.Product{}, errors.New(constantes.ConversionError)
+	} else if price <= 0 {
+		return models.Product{}, errors.New("product error: le prix invalide")
 	}
 	fmt.Printf("saisir la quantité pour le produit%d: ", numero)
 	str, err := read.StreamReader.ReadString('\n')
@@ -60,33 +66,33 @@ func createStockProduct(numero int) (models.Product, error) {
 	qte, err := strconv.ParseInt(str, 10, 64)
 	if err != nil {
 		return models.Product{}, errors.New(constantes.ConversionError)
+	} else if qte <= 0 {
+		return models.Product{}, errors.New("product error: qte du produit invalide")
 	}
 	var stock models.Stock = models.Stock{
 		Quantity: int(qte),
 	}
 
-	product, err := models.NewProduct(uuid, sku, name, desc, price, models.Euro, stock, time.Now(), time.Time{}, true)
+	product, err := models.NewProduct(uuid, sku, name, desc, price, models.Euro,
+		stock, time.Now(), time.Time{}, true)
 	if err != nil {
 		return models.Product{}, err
 	}
-
 	return product, nil
 }
 
-func FillStcok(nbProducts int) {
+func FillStcok(nbProducts int) ([]models.Product, error) {
 	if nbProducts <= 0 {
-		fmt.Println("nombre de produits pour le stock est invalid")
-
-		return
+		return nil, errors.New("nombre de produits pour le stock est invalid")
 	}
 	var products []models.Product = make([]models.Product, 0, nbProducts)
 	for i := 1; i <= nbProducts; i++ {
 		product, err := createStockProduct(i)
 		if err != nil {
 			fmt.Println(err)
-			return
+			return nil, err
 		}
 		products = append(products, product)
 	}
-	fmt.Println(products)
+	return products, nil
 }
