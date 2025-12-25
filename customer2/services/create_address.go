@@ -39,7 +39,7 @@ func createAddress() (models.Address, error) {
 		return models.Address{}, errors.New(constantes.EmptyError)
 	}
 
-	var uuid string = generateUuid((streetName))
+	var uuid string = generateUuid(streetName)
 
 	fmt.Print("Saisir la boite postale: ")
 	zipCode, err := read.StreamReader.ReadString('\n')

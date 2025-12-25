@@ -20,7 +20,7 @@ func CreateCustomer() (models.Customer, error) {
 	if lastname == "" {
 		return models.Customer{}, errors.New(constantes.EmptyError)
 	}
-	var uuid string = generateUuid(lastname)
+	var uuid = generateUuid(lastname)
 
 	fmt.Print("Saisir le prénom du client: ")
 	firstname, err := read.StreamReader.ReadString('\n') //read until meet \n
@@ -40,7 +40,7 @@ func CreateCustomer() (models.Customer, error) {
 	if email == "" {
 		return models.Customer{}, errors.New(constantes.EmptyError)
 	} else if len(email) < 5 || !strings.Contains(email, "@") {
-		return models.Customer{}, errors.New("Email invalid")
+		return models.Customer{}, errors.New("email invalid")
 	}
 	address, err := createAddress()
 	if err != nil {

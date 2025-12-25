@@ -6,18 +6,19 @@ import (
 	"strings"
 
 	"github.com/trng-tr/golab2/constantes"
+	"github.com/trng-tr/golab2/customer"
 	"github.com/trng-tr/golab2/customer2/services"
 	"github.com/trng-tr/golab2/read"
 )
 
 func main() {
-	/* customer.GetOrder()
+	customer.GetOrder()
 	c, err := services.CreateCustomer()
 	if err != nil {
 		fmt.Println("error is raised: ", err)
 		return
 	}
-	c.PrintCustomer() */
+	c.PrintCustomer()
 	fmt.Println("On va remplir le stock avec quelques produits")
 	fmt.Print("Saisir le nombre de produits pour le stock :")
 	str, err := read.StreamReader.ReadString('\n') // read until meet \n
@@ -33,7 +34,7 @@ func main() {
 	if err != nil {
 		fmt.Println(constantes.ConversionError)
 	}
-	stock, err := services.FillStcok(int(nbProducts))
+	stock, err := services.FillStock(int(nbProducts))
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -57,7 +58,7 @@ func main() {
 		fmt.Println(constantes.ConversionError)
 		return
 	}
-	order, err := services.CreateOrder(int(cmdNbProducts))
+	order, err := services.CreateOrder(cmdNbProducts)
 	if err != nil {
 		fmt.Println(err)
 		return

@@ -12,14 +12,14 @@ import (
 )
 
 func createItem(numItem int) (Item, error) {
-	var i Item = Item{}
-	var uuid string = uuid.New().String()
-	i.uuid = uuid
+	var i = Item{}
+	var u = uuid.New().String()
+	i.uuid = u
 	fmt.Printf("Saisir le titre de l'item %d :", numItem)
 	if !scan.Scanner.Scan() {
 		return Item{}, errors.New(constantes.ReadingError)
 	}
-	var title string = scan.Scanner.Text()
+	var title = scan.Scanner.Text()
 
 	if title == "" {
 		return Item{}, errors.New(constantes.EmptyError)
@@ -29,7 +29,7 @@ func createItem(numItem int) (Item, error) {
 	if !scan.Scanner.Scan() {
 		return Item{}, errors.New(constantes.ReadingError)
 	}
-	var str string = scan.Scanner.Text()
+	var str = scan.Scanner.Text()
 	if str == "" {
 		return Item{}, errors.New(constantes.EmptyError)
 	}

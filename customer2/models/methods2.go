@@ -2,7 +2,7 @@ package models
 
 import "fmt"
 
-func (o Order) PrintOrder() {
+func (o *Order) PrintOrder() {
 	fmt.Println("{")
 	fmt.Printf("  id: %s\n", o.Uuid)
 	fmt.Println("  customer {")
@@ -35,7 +35,7 @@ func (o Order) PrintOrder() {
 	fmt.Println("}")
 }
 
-// outils mis en disposition de l'utilisateur pour ajouter des items dans sa commande
-func (order *Order) AddItem(orderItem OrderItem) {
-	order.Items = append(order.Items, orderItem)
+// AddItem outils mis en disposition de l'utilisateur pour ajouter des items dans sa commande
+func (o *Order) AddItem(orderItem OrderItem) {
+	o.Items = append(o.Items, orderItem)
 }

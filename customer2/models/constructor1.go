@@ -2,7 +2,7 @@ package models
 
 func NewCustomer(uuid string, firstname string, lastanme string,
 	email string, address Address) (Customer, error) {
-	var c Customer = Customer{
+	var c = Customer{
 		Uuid:      uuid,
 		Firstname: firstname,
 		Lastname:  lastanme,

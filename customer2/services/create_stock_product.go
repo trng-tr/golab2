@@ -24,8 +24,8 @@ func createStockProduct(numero int) (models.Product, error) {
 	} else if len(name) < 2 {
 		return models.Product{}, errors.New("product error: le nom du produit trop court")
 	}
-	var uuid string = generateUuid(name)
-	var sku string = generateUuid(name)
+	var uuid = generateUuid(name)
+	var sku = generateUuid(name)
 
 	fmt.Printf("saisir la description du produit %d:", numero)
 	desc, err := read.StreamReader.ReadString('\n')
@@ -81,7 +81,7 @@ func createStockProduct(numero int) (models.Product, error) {
 	return product, nil
 }
 
-func FillStcok(nbProducts int) ([]models.Product, error) {
+func FillStock(nbProducts int) ([]models.Product, error) {
 	if nbProducts <= 0 {
 		return nil, errors.New("nombre de produits pour le stock est invalid")
 	}

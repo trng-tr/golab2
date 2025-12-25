@@ -10,14 +10,14 @@ import (
 )
 
 func createCustomer() (Customer, error) {
-	var c Customer = Customer{} // init empty customer
-	var uuid string = uuid.New().String()
-	c.uuid = uuid
+	var c = Customer{} // init empty customer
+	var id = uuid.New().String()
+	c.uuid = id
 	fmt.Print("Saisir le nom du client: ")
 	if !scan.Scanner.Scan() {
 		return Customer{}, errors.New(constantes.ReadingError)
 	}
-	var lastname string = scan.Scanner.Text()
+	var lastname = scan.Scanner.Text()
 	if lastname == "" {
 		return Customer{}, errors.New(constantes.EmptyError)
 	}
@@ -26,7 +26,7 @@ func createCustomer() (Customer, error) {
 	if !scan.Scanner.Scan() {
 		return Customer{}, errors.New(constantes.ReadingError)
 	}
-	var firstname string = scan.Scanner.Text()
+	var firstname = scan.Scanner.Text()
 	if firstname == "" {
 		return Customer{}, errors.New(constantes.EmptyError)
 	}
@@ -36,7 +36,7 @@ func createCustomer() (Customer, error) {
 	if !scan.Scanner.Scan() {
 		return Customer{}, errors.New(constantes.ReadingError)
 	}
-	var email string = scan.Scanner.Text()
+	var email = scan.Scanner.Text()
 	if email == "" {
 		return Customer{}, errors.New(constantes.EmptyError)
 	}

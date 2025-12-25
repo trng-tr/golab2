@@ -9,7 +9,7 @@ type Customer struct {
 	Firstname string
 	Lastname  string
 	Email     string
-	Address   Address // remplcé par AddressId référençant l'entité Address
+	Address   Address // remplacé par AddressId référençant l'entité Address
 }
 type Address struct {
 	Uuid       string
@@ -47,6 +47,5 @@ type OrderItem struct { //utilisé comme dto pour la commande
 }
 
 const (
-	Euro   string = "€"
-	Dollar string = "$"
+	Euro string = "€"
 )
